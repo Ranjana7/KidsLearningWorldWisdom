@@ -106,6 +106,55 @@
       ]
     },
     {
+      id: "ya-devi-sarvabhuteshu",
+      title: "Ya Devi Sarvabhūteṣu",
+      description: "A five-verse Devi stuti with devotion and peace.",
+      learningVideo: "../assets/media/shlokas/ya_devi_sarvabhuteshu_web.mp4?v=20261114u1",
+      thumbnail: "../assets/illustrations/shloka/ya-devi-scene-1.png",
+      thumbLabel: "🌺 Five-Verse Devi Stuti",
+      sceneImages: [
+        "../assets/illustrations/shloka/ya-devi-scene-1.png",
+        "../assets/illustrations/shloka/ya-devi-scene-2.png",
+        "../assets/illustrations/shloka/ya-devi-scene-3.png",
+        "../assets/illustrations/shloka/ya-devi-scene-4.png"
+      ],
+      lines: [
+        {
+          sanskrit: "या देवी सर्वभूतेषु विष्णुमायेति शब्दिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu viṣṇumāyeti śabditā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: ""
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु विद्यारूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu vidyārūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: ""
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु छायारूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu chāyārūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: ""
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu śaktirūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: ""
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु शान्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu śāntirūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: ""
+        }
+      ],
+      recitationDuration: 27.06,
+      lineWindows: [
+        { start: 0.00, end: 0.1807 },
+        { start: 0.1807, end: 0.3769 },
+        { start: 0.3769, end: 0.5248 },
+        { start: 0.5248, end: 0.6863 },
+        { start: 0.6863, end: 0.8440 }
+      ]
+    },
+    {
       id: "coming-soon",
       title: "More Shlokas Coming Soon!",
       description: "More beautiful mantras are blooming soon.",
