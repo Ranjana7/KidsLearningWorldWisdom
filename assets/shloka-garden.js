@@ -109,7 +109,7 @@
       id: "ya-devi-sarvabhuteshu",
       title: "Ya Devi Sarvabhūteṣu",
       description: "A five-verse Devi stuti with devotion and peace.",
-      learningVideo: "../assets/media/shlokas/ya_devi_sarvabhuteshu_web.mp4?v=20261114u2",
+      learningVideo: "../assets/media/shlokas/ya_devi_sarvabhuteshu_web.mp4?v=20261114u3",
       thumbnail: "../assets/illustrations/shloka/ya-devi-scene-1.png",
       thumbLabel: "🌺 Five-Verse Devi Stuti",
       hidePlayerSubtitles: true,
