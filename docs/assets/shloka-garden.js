@@ -109,9 +109,10 @@
       id: "ya-devi-sarvabhuteshu",
       title: "Ya Devi Sarvabhūteṣu",
       description: "A five-verse Devi stuti with devotion and peace.",
-      learningVideo: "../assets/media/shlokas/ya_devi_sarvabhuteshu_web.mp4?v=20261114u1",
+      learningVideo: "../assets/media/shlokas/ya_devi_sarvabhuteshu_web.mp4?v=20261114u2",
       thumbnail: "../assets/illustrations/shloka/ya-devi-scene-1.png",
       thumbLabel: "🌺 Five-Verse Devi Stuti",
+      hidePlayerSubtitles: true,
       sceneImages: [
         "../assets/illustrations/shloka/ya-devi-scene-1.png",
         "../assets/illustrations/shloka/ya-devi-scene-2.png",
@@ -145,13 +146,13 @@
           meaning: ""
         }
       ],
-      recitationDuration: 27.06,
+      recitationDuration: 74.078,
       lineWindows: [
-        { start: 0.00, end: 0.1807 },
-        { start: 0.1807, end: 0.3769 },
-        { start: 0.3769, end: 0.5248 },
-        { start: 0.5248, end: 0.6863 },
-        { start: 0.6863, end: 0.8440 }
+        { start: 0.00, end: 0.20 },
+        { start: 0.20, end: 0.40 },
+        { start: 0.40, end: 0.60 },
+        { start: 0.60, end: 0.80 },
+        { start: 0.80, end: 1.00 }
       ]
     },
     {
@@ -356,9 +357,15 @@
     runtime.currentCueIndex = cueIndex;
     const cue = cues[cueIndex];
     const line = shloka.lines[cue.lineIndex];
-    runtime.subtitleLine.textContent = line.sanskrit;
-    runtime.subtitleTranslit.textContent = line.transliteration;
-    runtime.subtitleMeaning.textContent = line.meaning;
+    if (shloka.hidePlayerSubtitles) {
+      runtime.subtitleLine.textContent = "";
+      runtime.subtitleTranslit.textContent = "";
+      runtime.subtitleMeaning.textContent = "";
+    } else {
+      runtime.subtitleLine.textContent = line.sanskrit;
+      runtime.subtitleTranslit.textContent = line.transliteration;
+      runtime.subtitleMeaning.textContent = line.meaning;
+    }
     highlightLine(cue.lineIndex);
     highlightScene(timeSec, shloka);
     markLinePracticed(shloka, cue.lineIndex);
@@ -484,6 +491,7 @@
     runtime.subtitleLine = document.getElementById("shlokaSubtitleLine");
     runtime.subtitleTranslit = document.getElementById("shlokaSubtitleTranslit");
     runtime.subtitleMeaning = document.getElementById("shlokaSubtitleMeaning");
+    const subtitleBlock = holder.querySelector(".shloka-subtitle");
     runtime.replayBtn = document.getElementById("chantAgainBtn");
     runtime.closeBtn = document.getElementById("closeShlokaPlayerBtn");
     runtime.currentCueIndex = -1;
@@ -491,9 +499,16 @@
     const video = document.getElementById("shlokaVideo");
     runtime.video = video;
     video.src = resolvePath(shloka.learningVideo);
-    runtime.subtitleLine.textContent = shloka.lines[0].sanskrit;
-    runtime.subtitleTranslit.textContent = shloka.lines[0].transliteration;
-    runtime.subtitleMeaning.textContent = shloka.lines[0].meaning;
+    if (subtitleBlock) subtitleBlock.style.display = shloka.hidePlayerSubtitles ? "none" : "";
+    if (shloka.hidePlayerSubtitles) {
+      runtime.subtitleLine.textContent = "";
+      runtime.subtitleTranslit.textContent = "";
+      runtime.subtitleMeaning.textContent = "";
+    } else {
+      runtime.subtitleLine.textContent = shloka.lines[0].sanskrit;
+      runtime.subtitleTranslit.textContent = shloka.lines[0].transliteration;
+      runtime.subtitleMeaning.textContent = shloka.lines[0].meaning;
+    }
     runtime.currentCues = [];
     runtime.currentSceneWindows = [];
 
