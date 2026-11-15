@@ -541,6 +541,21 @@ body.lang-theme-portuguese .panel {
   background: linear-gradient(120deg, var(--primary), var(--primary-2));
 }
 
+.main-nav a.contact-tab {
+  color: #fff;
+  background: linear-gradient(120deg, #ff6b9f, #7a41ff 54%, #32b7ff);
+  box-shadow: 0 8px 16px rgba(84, 54, 172, 0.22);
+}
+
+.main-nav a.contact-tab:hover,
+.main-nav a.contact-tab:focus-visible {
+  filter: saturate(1.1) brightness(1.03);
+}
+
+.main-nav a.contact-tab[aria-current="page"] {
+  background: linear-gradient(120deg, #ff4f94, #5f4bff 54%, #24a6ff);
+}
+
 .mute-btn {
   border: 0;
   border-radius: 12px;
@@ -670,6 +685,51 @@ body.lang-theme-portuguese .panel {
   border-radius: 999px;
   padding: 6px 12px;
   font-weight: 700;
+}
+
+.language-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.language-hero-layout,
+.hero-layout {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-star-trail {
+  position: absolute;
+  right: clamp(8px, 2vw, 20px);
+  top: clamp(10px, 2.2vw, 24px);
+  width: clamp(140px, 24vw, 320px);
+  height: clamp(64px, 11vw, 124px);
+  pointer-events: none;
+  opacity: 0.82;
+  z-index: 1;
+}
+
+.hero-star {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #fff9cf, #f7c34a 74%, rgba(247, 195, 74, 0));
+  box-shadow: 0 0 10px rgba(247, 195, 74, 0.38);
+  animation: heroStarPulse 3.2s ease-in-out infinite;
+}
+
+.hero-star:nth-child(1) { left: 0%; top: 72%; }
+.hero-star:nth-child(2) { left: 14%; top: 60%; animation-delay: -0.35s; }
+.hero-star:nth-child(3) { left: 28%; top: 48%; animation-delay: -0.7s; }
+.hero-star:nth-child(4) { left: 44%; top: 37%; animation-delay: -1.05s; }
+.hero-star:nth-child(5) { left: 61%; top: 26%; animation-delay: -1.4s; }
+.hero-star:nth-child(6) { left: 79%; top: 16%; animation-delay: -1.75s; }
+.hero-star:nth-child(7) { left: 96%; top: 6%; animation-delay: -2.1s; }
+
+@keyframes heroStarPulse {
+  0%, 100% { transform: scale(0.78); opacity: 0.58; }
+  45% { transform: scale(1.12); opacity: 1; }
 }
 
 h1,
@@ -3925,6 +3985,15 @@ body.page-transitioning .site-header {
 
   .hero-layout {
     grid-template-columns: 1fr;
+  }
+
+  .hero-star-trail {
+    left: 50%;
+    right: auto;
+    top: 6px;
+    width: min(240px, 74vw);
+    transform: translateX(-50%);
+    opacity: 0.72;
   }
 
   .hero-concept-layer {
