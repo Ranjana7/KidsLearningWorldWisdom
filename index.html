@@ -61,9 +61,11 @@
 
     .home-top-nav {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 8px;
       margin-bottom: 14px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .home-top-nav a {
@@ -74,6 +76,7 @@
       background: #f6f9ff;
       border-radius: 12px;
       padding: 8px 12px;
+      flex: 0 0 auto;
     }
 
     .home-top-nav a:hover,
