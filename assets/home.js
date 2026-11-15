@@ -126,7 +126,8 @@
     mascotPriorityUntil: 0,
     topLockGuide: null,
     activeGuideKey: "",
-    scrollGuideHandlerBound: false
+    scrollGuideHandlerBound: false,
+    scrollGuideY: 0
   };
   if (typeof window.spSyncProgressModel === "function") {
     window.spSyncProgressModel(pathOrder, worldTotals);
@@ -431,12 +432,40 @@
     }
 
     if (!runtime.scrollGuideHandlerBound) {
-      const onScrollGuide = function () {
-        const wobble = Math.sin((window.scrollY || 0) / 120) * 6;
-        ui.scrollGuide.style.transform = "translateY(" + wobble.toFixed(2) + "px)";
+      let scrollTicking = false;
+      const pageWrap = document.querySelector(".page-wrap.home-adventure.with-mascot");
+      const rail = pageWrap ? pageWrap.querySelector(".mascot-rail") : null;
+      const updateGuidePosition = function () {
+        scrollTicking = false;
+        if (!ui.scrollGuide || !rail) return;
+        if (window.matchMedia("(max-width: 980px)").matches) {
+          runtime.scrollGuideY = 0;
+          ui.scrollGuide.style.transform = "";
+          return;
+        }
+        const docHeight = Math.max(
+          document.documentElement.scrollHeight || 0,
+          document.body ? document.body.scrollHeight : 0,
+          pageWrap ? pageWrap.scrollHeight : 0
+        );
+        const maxScroll = Math.max(1, docHeight - window.innerHeight);
+        const progress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+        const guideHeight = Math.ceil(ui.scrollGuide.getBoundingClientRect().height || 220);
+        const railHeight = Math.max(rail.offsetHeight || 0, pageWrap ? pageWrap.scrollHeight : 0);
+        const maxY = Math.max(0, railHeight - guideHeight - 16);
+        const targetY = maxY * progress;
+        runtime.scrollGuideY += (targetY - runtime.scrollGuideY) * 0.18;
+        const wobble = Math.sin((window.scrollY || 0) / 135) * 4;
+        ui.scrollGuide.style.transform = "translate3d(0," + (runtime.scrollGuideY + wobble).toFixed(2) + "px,0)";
       };
-      window.addEventListener("scroll", onScrollGuide, { passive: true });
-      onScrollGuide();
+      const requestUpdate = function () {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(updateGuidePosition);
+      };
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate, { passive: true });
+      requestUpdate();
       runtime.scrollGuideHandlerBound = true;
     }
   }
