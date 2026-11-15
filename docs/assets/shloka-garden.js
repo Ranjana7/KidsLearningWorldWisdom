@@ -112,7 +112,6 @@
       learningVideo: "../assets/media/shlokas/ya_devi_sarvabhuteshu_web.mp4?v=20261114u3",
       thumbnail: "../assets/illustrations/shloka/ya-devi-scene-1.png",
       thumbLabel: "🌺 Five-Verse Devi Stuti",
-      hidePlayerSubtitles: true,
       sceneImages: [
         "../assets/illustrations/shloka/ya-devi-scene-1.png",
         "../assets/illustrations/shloka/ya-devi-scene-2.png",
@@ -123,36 +122,36 @@
         {
           sanskrit: "या देवी सर्वभूतेषु विष्णुमायेति शब्दिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
           transliteration: "Yā devī sarvabhūteṣu viṣṇumāyeti śabditā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
-          meaning: ""
+          meaning: "To the Goddess in all beings as cosmic power, salutations again and again."
         },
         {
           sanskrit: "या देवी सर्वभूतेषु विद्यारूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
           transliteration: "Yā devī sarvabhūteṣu vidyārūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
-          meaning: ""
+          meaning: "To the Goddess in all beings as wisdom and learning, salutations again and again."
         },
         {
           sanskrit: "या देवी सर्वभूतेषु छायारूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
           transliteration: "Yā devī sarvabhūteṣu chāyārūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
-          meaning: ""
+          meaning: "To the Goddess in all beings as sheltering shade, salutations again and again."
         },
         {
           sanskrit: "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
           transliteration: "Yā devī sarvabhūteṣu śaktirūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
-          meaning: ""
+          meaning: "To the Goddess in all beings as strength and power, salutations again and again."
         },
         {
           sanskrit: "या देवी सर्वभूतेषु शान्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
           transliteration: "Yā devī sarvabhūteṣu śāntirūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
-          meaning: ""
+          meaning: "To the Goddess in all beings as peace, salutations again and again."
         }
       ],
       recitationDuration: 74.078,
       lineWindows: [
-        { start: 0.00, end: 0.20 },
-        { start: 0.20, end: 0.40 },
-        { start: 0.40, end: 0.60 },
-        { start: 0.60, end: 0.80 },
-        { start: 0.80, end: 1.00 }
+        { start: 0.00, end: 0.214 },
+        { start: 0.214, end: 0.414 },
+        { start: 0.414, end: 0.614 },
+        { start: 0.614, end: 0.808 },
+        { start: 0.808, end: 1.00 }
       ]
     },
     {
