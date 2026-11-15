@@ -158,7 +158,7 @@
       id: "vidya-treasure-knowledge",
       title: "Vidya – The Treasure of Knowledge",
       description: "Knowledge is a person's greatest beauty and protected treasure. It brings joy, fame, and guidance, stays with us on every journey, is honoured above wealth, and is the highest blessing.",
-      learningVideo: "../assets/media/shlokas/vidya_treasure_web.mp4?v=20261115u1",
+      learningVideo: "../assets/media/shlokas/vidya_treasure_web.mp4?v=20261115u2",
       thumbnail: "../assets/illustrations/shloka/vidya-scene-1.png",
       thumbLabel: "📚 Knowledge Treasure Shloka",
       sceneImages: [
@@ -168,10 +168,10 @@
         "../assets/illustrations/shloka/vidya-scene-4.png"
       ],
       lines: [
-        { sanskrit: "Vidyā nāma narasya rūpamadhikaṃ", transliteration: "pracchannaguptaṃ dhanam", meaning: "" },
-        { sanskrit: "Vidyā bhogakarī yaśaḥsukhakarī", transliteration: "vidyā gurūṇāṃ guruḥ", meaning: "" },
-        { sanskrit: "Vidyā bandhujano videśagamane", transliteration: "vidyā paraṃ daivatam", meaning: "" },
-        { sanskrit: "Vidyā rājasu pūjitā na tu dhanaṃ", transliteration: "vidyāvihīnaḥ paśuḥ", meaning: "" }
+        { sanskrit: "विद्या नाम नरस्य रूपमधिकं प्रच्छन्नगुप्तं धनम्", transliteration: "Vidyā nāma narasya rūpamadhikaṃ pracchannaguptaṃ dhanam", meaning: "Knowledge is a person's greatest beauty and a hidden, protected treasure." },
+        { sanskrit: "विद्या भोगकरी यशःसुखकरी विद्या गुरूणां गुरुः ।", transliteration: "Vidyā bhogakarī yaśaḥsukhakarī vidyā gurūṇāṃ guruḥ", meaning: "Knowledge brings joy, fame, and happiness; it is the teacher of teachers." },
+        { sanskrit: "विद्या बन्धुजनो विदेशगमने विद्या परं दैवतम्", transliteration: "Vidyā bandhujano videśagamane vidyā paraṃ daivatam", meaning: "Knowledge is a companion in distant journeys and is regarded as the highest divinity." },
+        { sanskrit: "विद्या राजसु पूजिता न तु धनं विद्याविहीनः पशुः ॥", transliteration: "Vidyā rājasu pūjitā na tu dhanaṃ vidyāvihīnaḥ paśuḥ", meaning: "Knowledge is honoured above wealth; without knowledge, one is compared to an animal." }
       ],
       recitationDuration: 81.124188,
       lineWindows: [
@@ -436,6 +436,14 @@
     updateShlokaCardBadges();
   }
 
+  function stopActiveVideo() {
+    if (!runtime.video) return;
+    runtime.video.pause();
+    runtime.video.removeAttribute("src");
+    runtime.video.load();
+    runtime.video = null;
+  }
+
   function renderSceneStrip(shloka) {
     const scenesHost = document.getElementById("shlokaScenes");
     runtime.sceneNodes = [];
@@ -574,7 +582,7 @@
 
     runtime.closeBtn.addEventListener("click", function (event) {
       event.stopPropagation();
-      if (runtime.video) runtime.video.pause();
+      stopActiveVideo();
       holder.classList.add("is-hidden");
       ui.status.textContent = "Choose a shloka card to begin the next chant.";
       setMascotSpeech(WELCOME_MESSAGE);
@@ -582,6 +590,7 @@
   }
 
   function selectShloka(id) {
+    stopActiveVideo();
     runtime.activeShlokaId = id;
     document.querySelectorAll("[data-shloka-card]").forEach(function (node) {
       node.classList.toggle("is-active", node.getAttribute("data-shloka-card") === id);
