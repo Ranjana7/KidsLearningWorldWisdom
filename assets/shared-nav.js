@@ -83,27 +83,44 @@
     return "Learning World";
   }
 
-  function createLink(href, text, current) {
+  function createLink(href, text, current, className) {
     const link = document.createElement("a");
     link.href = href;
     link.textContent = text;
     link.setAttribute("data-seamless-nav", "");
     if (current) link.setAttribute("aria-current", "page");
+    if (className) link.className = className;
     return link;
+  }
+
+  function ensureBrandChip() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+    if (header.querySelector(".site-brand-chip")) return;
+    const brand = document.createElement("a");
+    brand.href = "/";
+    brand.className = "site-brand-chip";
+    brand.setAttribute("data-seamless-nav", "");
+    brand.innerHTML = '<span class="brand-icon">🌈</span><span>Aricsso Kids</span>';
+    header.insertBefore(brand, nav);
   }
 
   const context = getPageContext();
   const bhashaHomeHref = "/bhashaparichay/";
   const aboutHref = "/about.html";
+  const contactHref = "/contact.html";
   const siteHomeHref = "/";
   const languageHomeHref = "index.html";
+  const isContactPage = /\/contact\.html$/i.test(context.path);
 
+  ensureBrandChip();
   nav.innerHTML = "";
 
   if (context.isRootHome || context.isRootAbout) {
     nav.appendChild(createLink(siteHomeHref, "Home", context.path === "/"));
     nav.appendChild(createLink(bhashaHomeHref, "Bhasha Home", context.isBhashaHubHome));
     nav.appendChild(createLink(aboutHref, "About", context.isRootAbout));
+    nav.appendChild(createLink(contactHref, "Contact", isContactPage, "contact-tab"));
     return;
   }
 
@@ -111,6 +128,7 @@
     nav.appendChild(createLink(bhashaHomeHref, "Bhasha Home", false));
     nav.appendChild(createLink(languageHomeHref, "Home", context.isLanguageHome));
     nav.appendChild(createLink(aboutHref, "About", /\/about\.html$/i.test(context.path) && context.languagePath !== ""));
+    nav.appendChild(createLink(contactHref, "Contact", isContactPage, "contact-tab"));
     if (context.isLanguageWorld) {
       const worldTitle = worldTitleFromPath(context);
       const worldLink = createLink(window.location.pathname.split("/").pop() + window.location.search + window.location.hash, worldTitle, true);
