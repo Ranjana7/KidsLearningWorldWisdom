@@ -73,7 +73,7 @@
         { sanskrit: "तेजस्वि नावधीतमस्तु मा विद्विषावहै ।", transliteration: "Tejasvi navadhitamastu ma vidvishavahai", meaning: "May our learning shine, and may we stay kind to each other." },
         { sanskrit: "ॐ शान्तिः शान्तिः शान्तिः ॥", transliteration: "Om shantih shantih shantih", meaning: "Om, peace, peace, peace." }
       ],
-      recitationDuration: 28.65,
+      recitationDuration: 28.633333,
       lineWindows: [
         { start: 0.00, end: 0.2164 },
         { start: 0.2164, end: 0.4258 },
@@ -99,7 +99,7 @@
         { sanskrit: "नमो देव्यै महादेव्यै शिवायै सततं नमः ।", transliteration: "Namo devyai mahadevyai shivayai satatam namah", meaning: "Salutations always to the Divine Great Goddess, the auspicious one." },
         { sanskrit: "नमः प्रकृत्यै भद्रायै नियताः प्रणताः स्म ताम् ॥", transliteration: "Namah prakrityai bhadrayai niyatah pranatah sma tam", meaning: "Salutations to holy Prakriti; we bow to Her with steady devotion." }
       ],
-      recitationDuration: 19.24,
+      recitationDuration: 20.513,
       lineWindows: [
         { start: 0.00, end: 0.5457 },
         { start: 0.5457, end: 1.00 }
@@ -153,6 +153,34 @@
         { start: 0.614, end: 0.808 },
         { start: 0.808, end: 1.00 }
       ]
+    },
+    {
+      id: "vidya-treasure-knowledge",
+      title: "Vidya – The Treasure of Knowledge",
+      description: "Knowledge is a person's greatest beauty and protected treasure. It brings joy, fame, and guidance, stays with us on every journey, is honoured above wealth, and is the highest blessing.",
+      learningVideo: "../assets/media/shlokas/vidya_treasure_web.mp4?v=20261115u1",
+      thumbnail: "../assets/illustrations/shloka/vidya-scene-1.png",
+      thumbLabel: "📚 Knowledge Treasure Shloka",
+      sceneImages: [
+        "../assets/illustrations/shloka/vidya-scene-1.png",
+        "../assets/illustrations/shloka/vidya-scene-2.png",
+        "../assets/illustrations/shloka/vidya-scene-3.png",
+        "../assets/illustrations/shloka/vidya-scene-4.png"
+      ],
+      lines: [
+        { sanskrit: "Vidyā nāma narasya rūpamadhikaṃ", transliteration: "pracchannaguptaṃ dhanam", meaning: "" },
+        { sanskrit: "Vidyā bhogakarī yaśaḥsukhakarī", transliteration: "vidyā gurūṇāṃ guruḥ", meaning: "" },
+        { sanskrit: "Vidyā bandhujano videśagamane", transliteration: "vidyā paraṃ daivatam", meaning: "" },
+        { sanskrit: "Vidyā rājasu pūjitā na tu dhanaṃ", transliteration: "vidyāvihīnaḥ paśuḥ", meaning: "" }
+      ],
+      recitationDuration: 81.124188,
+      lineWindows: [
+        { start: 0.00, end: 0.2499 },
+        { start: 0.2499, end: 0.4998 },
+        { start: 0.4998, end: 0.7497 },
+        { start: 0.7497, end: 1.00 }
+      ],
+      loopCount: 1
     },
     {
       id: "coming-soon",
@@ -513,8 +541,9 @@
 
     video.addEventListener("loadedmetadata", function () {
       const duration = Number(video.duration) || (shloka.recitationDuration * runtime.loopCount);
-      const loopCount = Math.max(1, Math.round(duration / shloka.recitationDuration));
-      const recitationDuration = duration / loopCount;
+      const detectedLoopCount = Math.max(1, Math.round(duration / shloka.recitationDuration));
+      const loopCount = Math.max(1, Number(shloka.loopCount) || detectedLoopCount);
+      const recitationDuration = shloka.recitationDuration;
       runtime.loopCount = loopCount;
       runtime.currentCues = buildLoopCues(shloka.lineWindows, loopCount, recitationDuration);
       runtime.currentSceneWindows = buildSceneWindows(loopCount, recitationDuration);
