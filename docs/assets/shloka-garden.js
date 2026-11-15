@@ -155,6 +155,104 @@
       ]
     },
     {
+      id: "ya-devi-sarvabhuteshu-female",
+      title: "Ya Devi Sarvabhūteṣu (Female)",
+      description: "A five-verse Devi stuti with devotion and peace (female voice).",
+      learningVideo: "../assets/media/shlokas/ya_devi_sarvabhuteshu_female_web.mp4?v=20261115u1",
+      thumbnail: "../assets/illustrations/shloka/ya-devi-scene-2.png",
+      thumbLabel: "🌺 Devi Stuti (Female)",
+      sceneImages: [
+        "../assets/illustrations/shloka/ya-devi-scene-1.png",
+        "../assets/illustrations/shloka/ya-devi-scene-2.png",
+        "../assets/illustrations/shloka/ya-devi-scene-3.png",
+        "../assets/illustrations/shloka/ya-devi-scene-4.png"
+      ],
+      lines: [
+        {
+          sanskrit: "या देवी सर्वभूतेषु विष्णुमायेति शब्दिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu viṣṇumāyeti śabditā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as cosmic power, salutations again and again."
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु विद्यारूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu vidyārūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as wisdom and learning, salutations again and again."
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु छायारूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu chāyārūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as sheltering shade, salutations again and again."
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu śaktirūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as strength and power, salutations again and again."
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु शान्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu śāntirūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as peace, salutations again and again."
+        }
+      ],
+      recitationDuration: 78,
+      lineWindows: [
+        { start: 0.00, end: 0.214 },
+        { start: 0.214, end: 0.414 },
+        { start: 0.414, end: 0.614 },
+        { start: 0.614, end: 0.808 },
+        { start: 0.808, end: 1.00 }
+      ]
+    },
+    {
+      id: "ya-devi-sarvabhuteshu-male",
+      title: "Ya Devi Sarvabhūteṣu (Male)",
+      description: "A five-verse Devi stuti with devotion and peace (male voice).",
+      learningVideo: "../assets/media/shlokas/ya_devi_sarvabhuteshu_male_web.mp4?v=20261115u1",
+      thumbnail: "../assets/illustrations/shloka/ya-devi-scene-3.png",
+      thumbLabel: "🕉️ Devi Stuti (Male)",
+      sceneImages: [
+        "../assets/illustrations/shloka/ya-devi-scene-1.png",
+        "../assets/illustrations/shloka/ya-devi-scene-2.png",
+        "../assets/illustrations/shloka/ya-devi-scene-3.png",
+        "../assets/illustrations/shloka/ya-devi-scene-4.png"
+      ],
+      lines: [
+        {
+          sanskrit: "या देवी सर्वभूतेषु विष्णुमायेति शब्दिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu viṣṇumāyeti śabditā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as cosmic power, salutations again and again."
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु विद्यारूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu vidyārūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as wisdom and learning, salutations again and again."
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु छायारूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu chāyārūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as sheltering shade, salutations again and again."
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu śaktirūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as strength and power, salutations again and again."
+        },
+        {
+          sanskrit: "या देवी सर्वभूतेषु शान्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+          transliteration: "Yā devī sarvabhūteṣu śāntirūpeṇa saṃsthitā । Namastasyai namastasyai namastasyai namo namaḥ ॥",
+          meaning: "To the Goddess in all beings as peace, salutations again and again."
+        }
+      ],
+      recitationDuration: 79,
+      lineWindows: [
+        { start: 0.00, end: 0.214 },
+        { start: 0.214, end: 0.414 },
+        { start: 0.414, end: 0.614 },
+        { start: 0.614, end: 0.808 },
+        { start: 0.808, end: 1.00 }
+      ]
+    },
+    {
       id: "vidya-treasure-knowledge",
       title: "Vidya – The Treasure of Knowledge",
       description: "Knowledge is a person's greatest beauty and protected treasure. It brings joy, fame, and guidance, stays with us on every journey, is honoured above wealth, and is the highest blessing.",
