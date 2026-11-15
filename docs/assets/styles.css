@@ -2021,6 +2021,74 @@ th {
   font-size: 0.92rem;
 }
 
+.contact-shell {
+  width: min(960px, 100%);
+  margin: 0 auto;
+}
+
+.contact-form {
+  display: grid;
+  gap: 14px;
+}
+
+.contact-field {
+  display: grid;
+  gap: 6px;
+}
+
+.contact-field label {
+  font-weight: 700;
+  color: #30406b;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  border: 2px solid #d7e5ff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+}
+
+.contact-field textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.contact-field input:focus-visible,
+.contact-field textarea:focus-visible {
+  outline: 3px solid #ffb347;
+  outline-offset: 1px;
+  border-color: #adc4ff;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contact-success,
+.contact-error {
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 700;
+}
+
+.contact-success {
+  border: 1px solid #9edcb7;
+  background: #eafaf1;
+  color: #136542;
+}
+
+.contact-error {
+  border: 1px solid #f0b6b6;
+  background: #fff0f0;
+  color: #8f2121;
+}
+
 .applause-burst {
   position: fixed;
   left: 50%;
@@ -3873,6 +3941,10 @@ body.page-transitioning .site-header {
 
   .about-mithu-guide-art {
     margin: 0 auto;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
   }
 
   .world-grid {

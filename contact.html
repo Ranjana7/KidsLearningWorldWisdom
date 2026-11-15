@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aricsso Kids | Contact</title>
+  <meta name="description" content="Contact Aricsso Kids to share feedback, request content, or ask for support.">
+  <link rel="stylesheet" href="assets/styles.css?v=20261115u5">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="main-nav" aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/bhashaparichay/">Bhasha Home</a>
+      <a href="/sanskritparichay/">Language Home</a>
+      <a href="/contact.html" aria-current="page">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content" class="page-wrap">
+    <section class="panel contact-shell">
+      <p class="hero-badge">Aricsso Kids</p>
+      <h1>Contact Us</h1>
+      <p>Share your ideas so we can keep improving stories, shloka learning, yoga, meditation, and language adventures for children.</p>
+
+      <p id="contactSuccess" class="contact-success" hidden>Thank you. Your message has been sent successfully.</p>
+      <p id="contactError" class="contact-error" hidden>Sorry, we could not send your message right now. Please try again.</p>
+
+      <form class="contact-form" method="post" action="/contact-submit.php">
+        <div class="contact-grid">
+          <div class="contact-field">
+            <label for="contactName">Name *</label>
+            <input id="contactName" name="name" type="text" required autocomplete="name" maxlength="120">
+          </div>
+          <div class="contact-field">
+            <label for="contactEmail">Email *</label>
+            <input id="contactEmail" name="email" type="email" required autocomplete="email" maxlength="160">
+          </div>
+        </div>
+
+        <div class="contact-field">
+          <label for="contactPhone">Phone number (optional)</label>
+          <input id="contactPhone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+        </div>
+
+        <div class="contact-field">
+          <label for="contactFeedback">Feedback (optional)</label>
+          <textarea id="contactFeedback" name="feedback" maxlength="2000"></textarea>
+        </div>
+
+        <div class="contact-field">
+          <label for="contactRequest">Request to add content (optional)</label>
+          <textarea id="contactRequest" name="content_request" maxlength="2000"></textarea>
+        </div>
+
+        <div class="contact-field">
+          <label for="contactSupport">Support request (optional)</label>
+          <textarea id="contactSupport" name="support" maxlength="2000"></textarea>
+        </div>
+
+        <input type="hidden" name="source" value="contact-page">
+        <button class="button primary" type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    (function contactStatusFromQuery() {
+      var params = new URLSearchParams(window.location.search || "");
+      var ok = params.get("status") === "ok";
+      var error = params.get("status") === "error";
+      var okNode = document.getElementById("contactSuccess");
+      var errNode = document.getElementById("contactError");
+      if (okNode) okNode.hidden = !ok;
+      if (errNode) errNode.hidden = !error;
+    })();
+  </script>
+</body>
+</html>
