@@ -2823,6 +2823,31 @@ body.page-sanskrit-world .mithu-crest {
   stroke: #ff2548;
 }
 
+/* Alphabet Forest magical tree Mithu: match Sanskrit home red-blue palette. */
+#treeMithu .mithu-body {
+  fill: #2f7dff;
+}
+
+#treeMithu .mithu-belly {
+  fill: #dff0ff;
+}
+
+#treeMithu .mithu-tail {
+  fill: #2055c8;
+}
+
+#treeMithu .mithu-wing-left {
+  fill: #ff4e62;
+}
+
+#treeMithu .mithu-wing-right {
+  fill: #3f9dff;
+}
+
+#treeMithu .mithu-crest {
+  stroke: #ff2747;
+}
+
 /* Cursor-following Mithu: yellow-green with red crest site-wide. */
 .mini-cursor-mithu .mithu-body {
   fill: #92d74f;
