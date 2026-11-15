@@ -33,7 +33,8 @@
 
   function getPageContext() {
     const path = normalizePath(window.location.pathname);
-    const isRootHome = path === "/" || /\/index\.html$/i.test(path) && !/\/(sanskritparichay|spanishparichay|portugueseparichay)\//i.test(path);
+    const isBhashaHubHome = /\/bhashaparichay(?:\/|\/index\.html)$/i.test(path);
+    const isRootHome = path === "/" || isBhashaHubHome || /\/index\.html$/i.test(path) && !/\/(sanskritparichay|spanishparichay|portugueseparichay)\//i.test(path);
     const isRootAbout = /\/about\.html$/i.test(path) && !/\/sanskritparichay\//i.test(path);
 
     const languageMatch = path.match(/\/(sanskritparichay|spanishparichay|portugueseparichay)(?:\/|$)/i);
@@ -44,6 +45,7 @@
       path: path,
       languagePath: languagePath,
       isRootHome: isRootHome,
+      isBhashaHubHome: isBhashaHubHome,
       isRootAbout: isRootAbout,
       isLanguageHome: isLanguageHome,
       isLanguageWorld: isLanguageWorld
@@ -81,26 +83,44 @@
     return "Learning World";
   }
 
-  function createLink(href, text, current) {
+  function createLink(href, text, current, className) {
     const link = document.createElement("a");
     link.href = href;
     link.textContent = text;
     link.setAttribute("data-seamless-nav", "");
     if (current) link.setAttribute("aria-current", "page");
+    if (className) link.className = className;
     return link;
   }
 
-  const context = getPageContext();
-  const rootPathPrefix = context.languagePath ? "../" : "";
-  const bhashaHomeHref = rootPathPrefix + "index.html";
-  const aboutHref = rootPathPrefix + "about.html";
-  const languageHomeHref = "index.html";
+  function ensureBrandChip() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+    if (header.querySelector(".site-brand-chip")) return;
+    const brand = document.createElement("a");
+    brand.href = "/";
+    brand.className = "site-brand-chip";
+    brand.setAttribute("data-seamless-nav", "");
+    brand.innerHTML = '<span class="brand-icon">🌈</span><span>Aricsso Kids</span>';
+    header.insertBefore(brand, nav);
+  }
 
+  const context = getPageContext();
+  const bhashaHomeHref = "/bhashaparichay/";
+  const aboutHref = "/about.html";
+  const contactHref = "/contact.html";
+  const siteHomeHref = "/";
+  const languageHomeHref = "index.html";
+  const isContactPage = /\/contact\.html$/i.test(context.path);
+
+  ensureBrandChip();
   nav.innerHTML = "";
 
   if (context.isRootHome || context.isRootAbout) {
-    nav.appendChild(createLink("index.html", "Bhasha Home", context.isRootHome));
-    nav.appendChild(createLink("about.html", "About", context.isRootAbout));
+    nav.appendChild(createLink(siteHomeHref, "Home", context.path === "/"));
+    nav.appendChild(createLink(bhashaHomeHref, "Bhasha Home", context.isBhashaHubHome));
+    nav.appendChild(createLink(aboutHref, "About", context.isRootAbout));
+    nav.appendChild(createLink(contactHref, "Contact", isContactPage, "contact-tab"));
     return;
   }
 
@@ -108,6 +128,7 @@
     nav.appendChild(createLink(bhashaHomeHref, "Bhasha Home", false));
     nav.appendChild(createLink(languageHomeHref, "Home", context.isLanguageHome));
     nav.appendChild(createLink(aboutHref, "About", /\/about\.html$/i.test(context.path) && context.languagePath !== ""));
+    nav.appendChild(createLink(contactHref, "Contact", isContactPage, "contact-tab"));
     if (context.isLanguageWorld) {
       const worldTitle = worldTitleFromPath(context);
       const worldLink = createLink(window.location.pathname.split("/").pop() + window.location.search + window.location.hash, worldTitle, true);
