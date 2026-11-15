@@ -386,21 +386,21 @@
       {
         key: "hero",
         element: document.querySelector(".magic-hero"),
-        message: "Welcome! Tap Let's Start Our Adventure or Continue to begin."
+        message: "Namaste, superstar! Tap Start or Continue, and we will begin today's Sanskrit adventure."
       },
       {
         key: "worlds",
         element: document.getElementById("worlds"),
-        message: "Pick a world card and I will cheer you on as you learn Sanskrit."
+        message: "Beautiful choice! Pick any world card and I will guide you step by step."
       },
       {
         key: "challenge",
         element: document.getElementById("previewPanel"),
-        message: "Try Shloka Garden for guided chanting with line-by-line subtitles."
+        message: "Ready to chant? Open Shloka Garden and learn with clear line-by-line guidance."
       }
     ].filter(function (item) { return Boolean(item.element); });
 
-    setScrollGuideMessage("hero", "Welcome! Tap Let's Start Our Adventure or Continue to begin.");
+    setScrollGuideMessage("hero", "Namaste, superstar! Tap Start or Continue, and we will begin today's Sanskrit adventure.");
     if (typeof IntersectionObserver === "function" && sectionMap.length) {
       const entryState = new Map();
       const guideObserver = new IntersectionObserver(function (entries) {
