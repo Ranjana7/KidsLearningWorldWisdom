@@ -973,7 +973,17 @@
       }
       const sectionHeight = Math.max(section.offsetHeight || 0, section.getBoundingClientRect().height || 0);
       const mascotHeight = Math.ceil(ui.lessonMascot.getBoundingClientRect().height || 220);
-      const railHeight = Math.max(rail.offsetHeight || 0, pageWrap.scrollHeight || 0);
+      const contentBottom = sections.reduce(function (maxBottom, sectionNode) {
+        let sectionNodeTop = 0;
+        let sectionNodeParent = sectionNode;
+        while (sectionNodeParent && sectionNodeParent !== pageWrap) {
+          sectionNodeTop += sectionNodeParent.offsetTop || 0;
+          sectionNodeParent = sectionNodeParent.offsetParent;
+        }
+        const sectionNodeHeight = Math.max(sectionNode.offsetHeight || 0, sectionNode.getBoundingClientRect().height || 0);
+        return Math.max(maxBottom, sectionNodeTop + sectionNodeHeight);
+      }, 0);
+      const railHeight = Math.max(rail.offsetHeight || 0, contentBottom || 0);
       const targetTop = sectionTop + sectionHeight * 0.18;
       const maxTop = Math.max(0, railHeight - mascotHeight - 8);
       const clampedTop = Math.max(0, Math.min(maxTop, targetTop));
