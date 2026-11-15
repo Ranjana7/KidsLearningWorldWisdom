@@ -28,7 +28,7 @@
       <p id="contactSuccess" class="contact-success" hidden>Thank you. Your message has been sent successfully.</p>
       <p id="contactError" class="contact-error" hidden>Sorry, we could not send your message right now. Please try again.</p>
 
-      <form class="contact-form" method="post" action="/contact-submit.php">
+      <form class="contact-form" method="post" action="/api/contact">
         <div class="contact-grid">
           <div class="contact-field">
             <label for="contactName">Name *</label>
@@ -52,7 +52,7 @@
 
         <div class="contact-field">
           <label for="contactRequest">Request to add content (optional)</label>
-          <textarea id="contactRequest" name="content_request" maxlength="2000"></textarea>
+          <textarea id="contactRequest" name="contentRequest" maxlength="2000"></textarea>
         </div>
 
         <div class="contact-field">
