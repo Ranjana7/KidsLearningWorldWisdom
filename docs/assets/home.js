@@ -401,6 +401,34 @@
     ].filter(function (item) { return Boolean(item.element); });
 
     setScrollGuideMessage("hero", "Namaste Superhero! Tap Start or Continue, and we will begin today's Sanskrit adventure.");
+    const findActiveGuideItem = function () {
+      if (!sectionMap.length) return null;
+      const anchorY = window.innerHeight * 0.34;
+      let best = null;
+      let bestScore = -Infinity;
+      sectionMap.forEach(function (item) {
+        const rect = item.element.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const center = rect.top + (rect.height * 0.5);
+        const score = -Math.abs(center - anchorY);
+        if (score > bestScore) {
+          bestScore = score;
+          best = item;
+        }
+      });
+      return best || sectionMap[sectionMap.length - 1];
+    };
+
+    const topWithin = function (element, wrap) {
+      let top = 0;
+      let node = element;
+      while (node && node !== wrap) {
+        top += node.offsetTop || 0;
+        node = node.offsetParent;
+      }
+      return top;
+    };
+
     if (typeof IntersectionObserver === "function" && sectionMap.length) {
       const entryState = new Map();
       const guideObserver = new IntersectionObserver(function (entries) {
@@ -413,7 +441,7 @@
             entryState.delete(key);
           }
         });
-        let active = sectionMap[0];
+        let active = null;
         let maxRatio = -1;
         sectionMap.forEach(function (item) {
           const ratio = entryState.has(item.key) ? entryState.get(item.key) : -1;
@@ -422,6 +450,7 @@
             active = item;
           }
         });
+        if (maxRatio < 0) return;
         if (active) setScrollGuideMessage(active.key, active.message);
       }, { threshold: [0.2, 0.4, 0.6], rootMargin: "-22% 0px -45% 0px" });
 
@@ -477,13 +506,19 @@
         const guideHeight = Math.ceil(ui.scrollGuide.getBoundingClientRect().height || 220);
         const railHeight = Math.max(rail.offsetHeight || 0, content.railHeight || 0);
         const maxY = Math.max(0, railHeight - guideHeight - 16);
-        const targetY = maxY * progress;
+        const activeItem = findActiveGuideItem();
+        if (activeItem) setScrollGuideMessage(activeItem.key, activeItem.message);
+        let targetY = maxY * progress;
+        if (activeItem && pageWrap) {
+          const localTop = topWithin(activeItem.element, pageWrap);
+          const localHeight = Math.max(activeItem.element.offsetHeight || 0, activeItem.element.getBoundingClientRect().height || 0);
+          targetY = Math.max(0, Math.min(maxY, localTop + (localHeight * 0.12)));
+        }
         runtime.scrollGuideY += (targetY - runtime.scrollGuideY) * 0.18;
         if (Math.abs(targetY - runtime.scrollGuideY) < 0.2) {
           runtime.scrollGuideY = targetY;
         }
-        const wobble = (progress > 0.02 && progress < 0.98) ? (Math.sin((window.scrollY || 0) / 135) * 4) : 0;
-        const y = Math.max(0, Math.min(maxY, runtime.scrollGuideY + wobble));
+        const y = Math.max(0, Math.min(maxY, runtime.scrollGuideY));
         ui.scrollGuide.style.transform = "translate3d(0," + y.toFixed(2) + "px,0)";
       };
       const requestUpdate = function () {
