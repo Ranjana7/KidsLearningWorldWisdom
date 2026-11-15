@@ -115,14 +115,18 @@
     lottieButterflyTwo: document.getElementById("lottieButterflyTwo"),
     lottieButterflyThree: document.getElementById("lottieButterflyThree"),
     lottieSparkleOne: document.getElementById("lottieSparkleOne"),
-    lottieSparkleTwo: document.getElementById("lottieSparkleTwo")
+    lottieSparkleTwo: document.getElementById("lottieSparkleTwo"),
+    scrollGuide: document.getElementById("scrollMithuGuide"),
+    scrollGuideSpeech: document.getElementById("scrollGuideSpeech")
   };
 
   const state = loadHomeState();
   const daily = loadDailyProgress();
   const runtime = {
     mascotPriorityUntil: 0,
-    topLockGuide: null
+    topLockGuide: null,
+    activeGuideKey: "",
+    scrollGuideHandlerBound: false
   };
   if (typeof window.spSyncProgressModel === "function") {
     window.spSyncProgressModel(pathOrder, worldTotals);
@@ -132,6 +136,7 @@
   renderChallengeIdle();
   wireUi();
   initHomeLottie();
+  initScrollGuide();
   if (ui.homeHeroSubtitle && homeMsg.heroSubtitle) ui.homeHeroSubtitle.textContent = homeMsg.heroSubtitle;
   setMascotState("greeting", homeMsg.mascotIntro || "Namaste! Choose a world or play Challenge of the Day.");
   if (ui.challengeBtn) ui.challengeBtn.hidden = challengeSteps.length === 0;
@@ -362,6 +367,78 @@
     const topPad = headerHeight + 10;
     panel.style.scrollMarginTop = topPad + "px";
     panel.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  }
+
+  function setScrollGuideMessage(key, message) {
+    if (!ui.scrollGuideSpeech) return;
+    if (runtime.activeGuideKey === key) return;
+    runtime.activeGuideKey = key;
+    ui.scrollGuideSpeech.textContent = message;
+    if (typeof animate === "function") {
+      animate(ui.scrollGuideSpeech, { transform: ["scale(1)", "scale(1.03)", "scale(1)"] }, { duration: 0.36, easing: "ease-out" });
+    }
+  }
+
+  function initScrollGuide() {
+    if (!ui.scrollGuide || !ui.scrollGuideSpeech) return;
+    const sectionMap = [
+      {
+        key: "hero",
+        element: document.querySelector(".magic-hero"),
+        message: "Welcome! Tap Let's Start Our Adventure or Continue to begin."
+      },
+      {
+        key: "worlds",
+        element: document.getElementById("worlds"),
+        message: "Pick a world card and I will cheer you on as you learn Sanskrit."
+      },
+      {
+        key: "challenge",
+        element: document.getElementById("previewPanel"),
+        message: "Try Shloka Garden for guided chanting with line-by-line subtitles."
+      }
+    ].filter(function (item) { return Boolean(item.element); });
+
+    setScrollGuideMessage("hero", "Welcome! Tap Let's Start Our Adventure or Continue to begin.");
+    if (typeof IntersectionObserver === "function" && sectionMap.length) {
+      const entryState = new Map();
+      const guideObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          const key = entry.target.getAttribute("data-guide-key");
+          if (!key) return;
+          if (entry.isIntersecting) {
+            entryState.set(key, entry.intersectionRatio);
+          } else {
+            entryState.delete(key);
+          }
+        });
+        let active = sectionMap[0];
+        let maxRatio = -1;
+        sectionMap.forEach(function (item) {
+          const ratio = entryState.has(item.key) ? entryState.get(item.key) : -1;
+          if (ratio > maxRatio) {
+            maxRatio = ratio;
+            active = item;
+          }
+        });
+        if (active) setScrollGuideMessage(active.key, active.message);
+      }, { threshold: [0.2, 0.4, 0.6], rootMargin: "-22% 0px -45% 0px" });
+
+      sectionMap.forEach(function (item) {
+        item.element.setAttribute("data-guide-key", item.key);
+        guideObserver.observe(item.element);
+      });
+    }
+
+    if (!runtime.scrollGuideHandlerBound) {
+      const onScrollGuide = function () {
+        const wobble = Math.sin((window.scrollY || 0) / 120) * 6;
+        ui.scrollGuide.style.transform = "translateY(" + wobble.toFixed(2) + "px)";
+      };
+      window.addEventListener("scroll", onScrollGuide, { passive: true });
+      onScrollGuide();
+      runtime.scrollGuideHandlerBound = true;
+    }
   }
 
   function focusFirstChallengeControl() {
