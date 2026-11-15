@@ -386,7 +386,7 @@
       {
         key: "hero",
         element: document.querySelector(".magic-hero"),
-        message: "Namaste, superstar! Tap Start or Continue, and we will begin today's Sanskrit adventure."
+        message: "Namaste Superhero! Tap Start or Continue, and we will begin today's Sanskrit adventure."
       },
       {
         key: "worlds",
@@ -400,7 +400,7 @@
       }
     ].filter(function (item) { return Boolean(item.element); });
 
-    setScrollGuideMessage("hero", "Namaste, superstar! Tap Start or Continue, and we will begin today's Sanskrit adventure.");
+    setScrollGuideMessage("hero", "Namaste Superhero! Tap Start or Continue, and we will begin today's Sanskrit adventure.");
     if (typeof IntersectionObserver === "function" && sectionMap.length) {
       const entryState = new Map();
       const guideObserver = new IntersectionObserver(function (entries) {
@@ -435,6 +435,34 @@
       let scrollTicking = false;
       const pageWrap = document.querySelector(".page-wrap.home-adventure.with-mascot");
       const rail = pageWrap ? pageWrap.querySelector(".mascot-rail") : null;
+      const measureContent = function () {
+        const wrap = pageWrap;
+        if (!wrap) {
+          const docHeight = Math.max(
+            document.documentElement.scrollHeight || 0,
+            document.body ? document.body.scrollHeight : 0
+          );
+          return { bottomAbs: docHeight, railHeight: docHeight };
+        }
+        const wrapTopAbs = window.scrollY + wrap.getBoundingClientRect().top;
+        const candidates = Array.from(wrap.children).filter(function (node) { return node !== rail; });
+        if (!candidates.length) {
+          const fallbackHeight = Math.max(wrap.scrollHeight || 0, wrap.offsetHeight || 0);
+          return { bottomAbs: wrapTopAbs + fallbackHeight, railHeight: fallbackHeight };
+        }
+        let bottomAbs = 0;
+        let localBottom = 0;
+        candidates.forEach(function (node) {
+          if (!node || node.nodeType !== 1) return;
+          const rect = node.getBoundingClientRect();
+          const nodeBottomAbs = window.scrollY + rect.bottom;
+          if (nodeBottomAbs > bottomAbs) bottomAbs = nodeBottomAbs;
+          const nodeBottomLocal = (node.offsetTop || 0) + (node.offsetHeight || 0);
+          if (nodeBottomLocal > localBottom) localBottom = nodeBottomLocal;
+        });
+        const railHeight = Math.max(localBottom, wrap.offsetHeight || 0);
+        return { bottomAbs: Math.max(bottomAbs, wrapTopAbs + railHeight), railHeight: railHeight };
+      };
       const updateGuidePosition = function () {
         scrollTicking = false;
         if (!ui.scrollGuide || !rail) return;
@@ -443,15 +471,11 @@
           ui.scrollGuide.style.transform = "";
           return;
         }
-        const docHeight = Math.max(
-          document.documentElement.scrollHeight || 0,
-          document.body ? document.body.scrollHeight : 0,
-          pageWrap ? pageWrap.scrollHeight : 0
-        );
-        const maxScroll = Math.max(1, docHeight - window.innerHeight);
+        const content = measureContent();
+        const maxScroll = Math.max(1, content.bottomAbs - window.innerHeight);
         const progress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
         const guideHeight = Math.ceil(ui.scrollGuide.getBoundingClientRect().height || 220);
-        const railHeight = Math.max(rail.offsetHeight || 0, pageWrap ? pageWrap.scrollHeight : 0);
+        const railHeight = Math.max(rail.offsetHeight || 0, content.railHeight || 0);
         const maxY = Math.max(0, railHeight - guideHeight - 16);
         const targetY = maxY * progress;
         runtime.scrollGuideY += (targetY - runtime.scrollGuideY) * 0.18;
