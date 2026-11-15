@@ -162,6 +162,8 @@ body {
   display: flex;
   gap: 8px;
   flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .main-nav a {
@@ -170,6 +172,7 @@ body {
   font-weight: 700;
   padding: 10px 14px;
   border-radius: 12px;
+  flex: 0 0 auto;
 }
 
 .language-chooser-link {
@@ -4011,8 +4014,9 @@ body.page-transitioning .site-header {
   }
 
   .main-nav {
-    width: 100%;
-    justify-content: space-between;
+    width: auto;
+    max-width: 100%;
+    justify-content: flex-start;
     gap: 6px;
   }
 
@@ -4022,7 +4026,7 @@ body.page-transitioning .site-header {
   }
 
   .main-nav a {
-    flex: 1 1 0;
+    flex: 0 0 auto;
     text-align: center;
     padding: 9px 10px;
     font-size: 0.92rem;
