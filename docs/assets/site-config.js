@@ -12,9 +12,9 @@
   }, {});
 
   globalScope.SP_CONFIG = Object.assign({
-    TEST_MODE: true,
+    TEST_MODE: false,
     TEST_PROGRESS_RESET: {
-      enabled: true,
+      enabled: false,
       deploymentId: "2026-11-14-shloka-v1"
     },
     languageAvailability: mergedAvailability,
@@ -29,7 +29,7 @@
   }
   if (!globalScope.SP_CONFIG.TEST_PROGRESS_RESET) {
     globalScope.SP_CONFIG.TEST_PROGRESS_RESET = {
-      enabled: true,
+      enabled: false,
       deploymentId: "2026-11-14-shloka-v1"
     };
   }

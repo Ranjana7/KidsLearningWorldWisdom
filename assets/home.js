@@ -455,8 +455,12 @@
         const maxY = Math.max(0, railHeight - guideHeight - 16);
         const targetY = maxY * progress;
         runtime.scrollGuideY += (targetY - runtime.scrollGuideY) * 0.18;
-        const wobble = Math.sin((window.scrollY || 0) / 135) * 4;
-        ui.scrollGuide.style.transform = "translate3d(0," + (runtime.scrollGuideY + wobble).toFixed(2) + "px,0)";
+        if (Math.abs(targetY - runtime.scrollGuideY) < 0.2) {
+          runtime.scrollGuideY = targetY;
+        }
+        const wobble = (progress > 0.02 && progress < 0.98) ? (Math.sin((window.scrollY || 0) / 135) * 4) : 0;
+        const y = Math.max(0, Math.min(maxY, runtime.scrollGuideY + wobble));
+        ui.scrollGuide.style.transform = "translate3d(0," + y.toFixed(2) + "px,0)";
       };
       const requestUpdate = function () {
         if (scrollTicking) return;

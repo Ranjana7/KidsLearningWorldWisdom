@@ -926,20 +926,33 @@
 
     function findActiveSection() {
       const anchorY = window.innerHeight * 0.34;
+      const viewportBottom = window.innerHeight;
       let bestSection = null;
       let bestScore = -Infinity;
       sections.forEach(function (section) {
         const rect = section.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
         let score;
         if (rect.top <= anchorY && rect.bottom >= anchorY) score = 10000 - Math.abs(anchorY - rect.top);
-        else score = -Math.abs((rect.top + rect.height * 0.5) - anchorY);
+        else {
+          const centerDistance = Math.abs((rect.top + rect.height * 0.5) - anchorY);
+          const visibilityTop = Math.max(0, rect.top);
+          const visibilityBottom = Math.min(viewportBottom, rect.bottom);
+          const visibleHeight = Math.max(0, visibilityBottom - visibilityTop);
+          score = -centerDistance + (visibleHeight * 0.05);
+        }
         if (score > bestScore) {
           bestScore = score;
           bestSection = section;
         }
       });
-      return bestSection;
+      if (bestSection) return bestSection;
+      if (window.scrollY <= 4) return sections[0];
+      const docHeight = Math.max(
+        document.documentElement.scrollHeight || 0,
+        document.body ? document.body.scrollHeight : 0
+      );
+      const atBottom = (window.scrollY + window.innerHeight) >= (docHeight - 4);
+      return atBottom ? sections[sections.length - 1] : sections[0];
     }
 
     function sectionMessage(section) {
